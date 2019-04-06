@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,7 +12,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using PortfolioGallery.API.Core;
+using PortfolioGallery.API.Core.Repositories;
 using PortfolioGallery.API.Persistence;
+using PortfolioGallery.API.Persistence.Repositories;
 
 namespace PortfolioGallery.API
 {
@@ -29,6 +33,11 @@ namespace PortfolioGallery.API
         {
             services.AddDbContext<PortfolioGalleryDbContext>(builder =>
                 builder.UseSqlServer(Configuration["ConnectionString:Default"]));
+
+            services.AddAutoMapper();
+
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
                 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
