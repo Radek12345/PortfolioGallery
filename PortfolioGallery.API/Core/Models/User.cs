@@ -18,8 +18,16 @@ namespace PortfolioGallery.API.Core.Models
         [StringLength(255)]
         public string Email { get; set; }
 
+        [Required]
+        public byte[] PasswordHash { get; set; }
+
+        [Required]
+        public byte[] PasswordSalt { get; set; }
+
         public ICollection<Photo> Photos { get; set; }
 
-        public DateTime DateCreated { get; set; }
+        public DateTime Created { get; set; }
+
+        public DateTime? LastEdit { get; set; }
     }
 }

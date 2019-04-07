@@ -48,7 +48,7 @@ namespace PortfolioGallery.API.Controllers
         public async Task<IActionResult> CreateUser(UserResource resource)
         {
             var user = mapper.Map<UserResource, User>(resource);
-            user.DateCreated = DateTime.Now;
+            user.Created = DateTime.Now;
 
             repo.Add(user);
             await unit.CompleteAsync();

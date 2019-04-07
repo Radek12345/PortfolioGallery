@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PortfolioGallery.API.Persistence;
 
 namespace PortfolioGallery.API.Migrations
 {
     [DbContext(typeof(PortfolioGalleryDbContext))]
-    partial class PortfolioGalleryDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190407181010_ExtendedUserModel")]
+    partial class ExtendedUserModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,23 +58,21 @@ namespace PortfolioGallery.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Created");
+                    b.Property<DateTime>("DateCreated");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(255);
 
-                    b.Property<DateTime?>("LastEdit");
+                    b.Property<DateTime>("LastEdit");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(255);
 
-                    b.Property<byte[]>("PasswordHash")
-                        .IsRequired();
+                    b.Property<byte[]>("PasswordHash");
 
-                    b.Property<byte[]>("PasswordSalt")
-                        .IsRequired();
+                    b.Property<byte[]>("PasswordSalt");
 
                     b.HasKey("Id");
 
