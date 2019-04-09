@@ -1,3 +1,4 @@
+using System;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,7 +29,8 @@ namespace PortfolioGallery.API.Core.ServicesImplementations
 
             user.Email = user.Email.ToLower();
             user.Name = user.Name.ToLower();
-
+            user.Created = DateTime.Now;
+            
             repo.Add(user);
             await unit.CompleteAsync();
 

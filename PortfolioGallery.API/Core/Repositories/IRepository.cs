@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace PortfolioGallery.API.Core.Repositories
@@ -12,5 +14,7 @@ namespace PortfolioGallery.API.Core.Repositories
         void Add(T entity);
 
         void Remove(T entity);
+
+        Task<T> FirstOrDefault(Expression<Func<T, bool>> predicate);
     }
 }

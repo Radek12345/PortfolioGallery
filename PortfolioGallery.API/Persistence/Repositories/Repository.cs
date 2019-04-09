@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using PortfolioGallery.API.Core.Repositories;
@@ -24,14 +26,20 @@ namespace PortfolioGallery.API.Persistence.Repositories
             return await context.Set<T>().FindAsync(id);
         }
 
-        public void Add(T entity)
+        public virtual void Add(T entity)
         {
             context.Set<T>().Add(entity);
         }
 
-        public void Remove(T entity)
+        public virtual void Remove(T entity)
         {
             context.Set<T>().Remove(entity);
         }
+
+        public async virtual Task<T> FirstOrDefault(Expression<Func<T, bool>> predicate)
+        {
+            return await context.Set<T>().FirstOrDefaultAsync(predicate);
+        }
+
     }
 }

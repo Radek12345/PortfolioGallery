@@ -25,7 +25,7 @@ namespace PortfolioGallery.API.Controllers
             this.repo = repo;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetUser")]
         public async Task<IActionResult> GetUser(int id)
         {
             var user = await repo.Get(id);

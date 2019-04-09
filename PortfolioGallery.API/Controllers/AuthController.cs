@@ -23,16 +23,22 @@ namespace PortfolioGallery.API.Controllers
             this.service = service;
         }
 
-        // [HttpPost("register")]
-        // public async Task<IActionResult> Register(UserResource userResource)
-        // {
-        //     if (repo.)
-        //     var user = mapper.Map<UserResource, User>(userResource);
-            
-        //     var registeredUser = await service.Register(user, userResource.Password);
+        [HttpPost("register")]
+        public async Task<IActionResult> Register(UserResource resource)
+        {
+            if (await repo.FirstOrDefault(u =>
+                u.Email == resource.Email || u.Name == resource.Name) != null)
+            {
+                return BadRequest("User with that email or name already exists");
+            }
 
-        //     return StatusCode(201);
-        // }
+            var user = mapper.Map<User>(resource);
+            var registeredUser = await service.Register(user, resource.Password);
+
+            var userToReturn = mapper.Map<UserResource>(registeredUser);
+            return CreatedAtRoute("GetUser", new { controller = "Users", id = registeredUser.Id },
+                userToReturn);
+        }
     }
 
 }
