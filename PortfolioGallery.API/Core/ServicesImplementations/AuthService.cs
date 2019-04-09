@@ -1,7 +1,9 @@
 using System;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using PortfolioGallery.API.Controllers.Resources;
 using PortfolioGallery.API.Core.Models;
 using PortfolioGallery.API.Core.Repositories;
 using PortfolioGallery.API.Core.Services;
@@ -33,6 +35,28 @@ namespace PortfolioGallery.API.Core.ServicesImplementations
             
             repo.Add(user);
             await unit.CompleteAsync();
+
+            return user;
+        }
+
+        public async Task<User> Login(UserResource userResource)
+        {
+            User user;
+
+            if (userResource.Email != null)
+                user = await repo.FirstOrDefault(u => u.Email == userResource.Email.ToLower());
+            else
+                user = await repo.FirstOrDefault(u => u.Name == userResource.Name.ToLower());
+
+            if (user == null)
+                return null;
+
+            using (var hmac = new HMACSHA512(user.PasswordSalt))
+            {
+                var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(userResource.Password));
+                if (!user.PasswordHash.SequenceEqual(computedHash))
+                    return null;
+            }
 
             return user;
         }

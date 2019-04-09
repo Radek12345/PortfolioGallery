@@ -12,15 +12,15 @@ namespace PortfolioGallery.API.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly IAuthService service;
+        private readonly IAuthService authService;
         private readonly IRepository<User> repo;
         private readonly IMapper mapper;
 
-        public AuthController(IAuthService service, IRepository<User> repo, IMapper mapper)
+        public AuthController(IAuthService authService, IRepository<User> repo, IMapper mapper)
         {
             this.mapper = mapper;
             this.repo = repo;
-            this.service = service;
+            this.authService = authService;
         }
 
         [HttpPost("register")]
@@ -33,11 +33,22 @@ namespace PortfolioGallery.API.Controllers
             }
 
             var user = mapper.Map<User>(resource);
-            var registeredUser = await service.Register(user, resource.Password);
+            var registeredUser = await authService.Register(user, resource.Password);
 
             var userToReturn = mapper.Map<UserResource>(registeredUser);
             return CreatedAtRoute("GetUser", new { controller = "Users", id = registeredUser.Id },
                 userToReturn);
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(UserResource resource)
+        {
+            var user = await authService.Login(resource);
+
+            if (user == null)
+                return Unauthorized();
+
+            return Ok();
         }
     }
 
