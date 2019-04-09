@@ -10,8 +10,8 @@ namespace PortfolioGallery.API.Controllers.Resources
         [Required]
         public string Email { get; set; }
         
-        // [Required]
-        // [StringLength(255, MinimumLength = 8, ErrorMessage = "You must specify password of minimum 8 characters")]
-        // public string Password { get; set; }
+        [Required]
+        [StringLength(255, MinimumLength = 8, ErrorMessage = "You must specify password of minimum 8 characters")]
+        public string Password { get; set; }
     }
 }

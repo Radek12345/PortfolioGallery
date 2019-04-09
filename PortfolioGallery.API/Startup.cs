@@ -14,6 +14,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using PortfolioGallery.API.Core;
 using PortfolioGallery.API.Core.Repositories;
+using PortfolioGallery.API.Core.Services;
+using PortfolioGallery.API.Core.ServicesImplementations;
 using PortfolioGallery.API.Persistence;
 using PortfolioGallery.API.Persistence.Repositories;
 
@@ -38,6 +40,8 @@ namespace PortfolioGallery.API
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddTransient<IAuthService, AuthService>();
                 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
