@@ -24,7 +24,7 @@ namespace PortfolioGallery.API.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(UserResource resource)
+        public async Task<IActionResult> Register(RegisterResource resource)
         {
             if (await repo.FirstOrDefault(u =>
                 u.Email == resource.Email || u.Name == resource.Name) != null)
@@ -41,15 +41,17 @@ namespace PortfolioGallery.API.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(UserResource resource)
+        public async Task<IActionResult> Login(LoginResource resource)
         {
             var user = await authService.Login(resource);
 
             if (user == null)
                 return Unauthorized();
 
-            return Ok();
+            var token = authService.CreateToken(user);
+            var userResource = mapper.Map<UserResource>(user);
+
+            return Ok(new { token, userResource });
         }
     }
-
 }

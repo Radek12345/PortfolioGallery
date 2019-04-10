@@ -2,12 +2,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PortfolioGallery.API.Controllers.Resources
 {
-    public class UserResource
+    public class LoginResource
     {
         [Required]
-        public string Name { get; set; }
+        public string Login { get; set; }
 
         [Required]
-        public string Email { get; set; }
+        public string Password { get; set; }
     }
 }
