@@ -19,6 +19,7 @@ using PortfolioGallery.API.Core;
 using PortfolioGallery.API.Core.Repositories;
 using PortfolioGallery.API.Core.Services;
 using PortfolioGallery.API.Core.ServicesImplementations;
+using PortfolioGallery.API.Helpers;
 using PortfolioGallery.API.Persistence;
 using PortfolioGallery.API.Persistence.Repositories;
 
@@ -56,6 +57,9 @@ namespace PortfolioGallery.API
                     ValidateAudience = false
                 };
             });
+
+            services.Configure<CloudinarySettings>(Configuration
+                .GetSection("CloudinarySettings"));
                 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
