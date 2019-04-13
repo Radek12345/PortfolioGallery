@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
@@ -53,6 +54,7 @@ namespace PortfolioGallery.API.Core.ServicesImplementations
                 {
                     Url = imageUploadResult.Uri.ToString(),
                     PublicId = imageUploadResult.PublicId,
+                    DateAdded = DateTime.Now,
                     
                     // temp
                     Name = "test name",

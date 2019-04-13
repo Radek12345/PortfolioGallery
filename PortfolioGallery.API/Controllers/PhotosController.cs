@@ -18,12 +18,12 @@ namespace PortfolioGallery.API.Controllers
     [ApiController]
     public class PhotosController : ControllerBase
     {
-        private readonly IRepository<User> repo;
+        private readonly IUserRepository repo;
         private readonly IPhotoService photoService;
         private readonly IUnitOfWork unit;
         private readonly IMapper mapper;
 
-        public PhotosController(IRepository<User> repo, IPhotoService photoService,
+        public PhotosController(IUserRepository repo, IPhotoService photoService,
             IUnitOfWork unit, IMapper mapper)
         {
             this.mapper = mapper;
@@ -38,7 +38,7 @@ namespace PortfolioGallery.API.Controllers
             if (!ControllerHelper.IsAllowedUser(userId, User))
                 return Unauthorized();
 
-            var user = await repo.Get(userId);
+            var user = await repo.GetUserEager(userId);
 
             var photo = photoService.UploadPhotoToCloudinary(photoFile);
 
@@ -50,6 +50,7 @@ namespace PortfolioGallery.API.Controllers
                 return CreatedAtRoute("GetPhoto", new { id = photo.Id}, photoToReturn);
             }
 
+            // zrobić usuwanie z cloudinary!
             return BadRequest("Could not add the photo");
         }
 
