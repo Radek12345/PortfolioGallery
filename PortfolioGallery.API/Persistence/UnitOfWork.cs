@@ -12,9 +12,9 @@ namespace PortfolioGallery.API.Persistence
             this.context = context;
         }
 
-        public async Task CompleteAsync()
+        public async Task<bool> CompleteAsync()
         {
-            await context.SaveChangesAsync();
+            return await context.SaveChangesAsync() > 0;
         }
     }
 }
