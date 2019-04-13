@@ -64,5 +64,10 @@ namespace PortfolioGallery.API.Core.ServicesImplementations
 
             return photo;
         }
+
+        public void DeletePhotoFromCloudinary(Photo photo)
+        {
+            cloudinary.Destroy(new DeletionParams(photo.PublicId));
+        }
     }
 }

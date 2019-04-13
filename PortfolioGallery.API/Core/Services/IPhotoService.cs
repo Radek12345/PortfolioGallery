@@ -7,6 +7,8 @@ namespace PortfolioGallery.API.Core.Services
 {
     public interface IPhotoService
     {
-        Photo UploadPhotoToCloudinary(IFormFile photo); 
+        Photo UploadPhotoToCloudinary(IFormFile photo);
+
+        void DeletePhotoFromCloudinary(Photo photo);
     }
 }

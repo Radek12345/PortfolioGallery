@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -18,18 +19,20 @@ namespace PortfolioGallery.API.Controllers
     [ApiController]
     public class PhotosController : ControllerBase
     {
-        private readonly IUserRepository repo;
+        private readonly IUserRepository userRepo;
         private readonly IPhotoService photoService;
         private readonly IUnitOfWork unit;
         private readonly IMapper mapper;
+        private readonly IRepository<Photo> photoRepo;
 
-        public PhotosController(IUserRepository repo, IPhotoService photoService,
+        public PhotosController(IUserRepository userRepo, IRepository<Photo> photoRepo, IPhotoService photoService,
             IUnitOfWork unit, IMapper mapper)
         {
+            this.photoRepo = photoRepo;
             this.mapper = mapper;
             this.unit = unit;
             this.photoService = photoService;
-            this.repo = repo;
+            this.userRepo = userRepo;
         }
 
         [HttpPost]
@@ -38,7 +41,7 @@ namespace PortfolioGallery.API.Controllers
             if (!ControllerHelper.IsAllowedUser(userId, User))
                 return Unauthorized();
 
-            var user = await repo.GetUserEager(userId);
+            var user = await userRepo.GetUserEager(userId);
 
             var photo = photoService.UploadPhotoToCloudinary(photoFile);
 
@@ -47,18 +50,42 @@ namespace PortfolioGallery.API.Controllers
             if (await unit.CompleteAsync())
             {
                 var photoToReturn = mapper.Map<PhotoResource>(photo);
-                return CreatedAtRoute("GetPhoto", new { id = photo.Id}, photoToReturn);
+                return CreatedAtRoute("GetPhoto", new { id = photo.Id }, photoToReturn);
             }
 
             // zrobić usuwanie z cloudinary!
             return BadRequest("Could not add the photo");
         }
 
-        [HttpGet("{id}", Name = "GetPhoto")]
-        public async Task<IActionResult> GetPhoto(int id)
+        [HttpGet("{photoId}", Name = "GetPhoto")]
+        public async Task<IActionResult> GetPhoto(int photoId)
         {
-            var photo = await repo.Get(id);
+            var photo = await photoRepo.Get(photoId);
             return Ok(mapper.Map<PhotoResource>(photo));
+        }
+
+        [HttpDelete("{photoId}")]
+        public async Task<IActionResult> DeletePhoto(int userId, int photoId)
+        {
+            if (!ControllerHelper.IsAllowedUser(userId, User))
+                return Unauthorized();
+
+            var user = await userRepo.GetUserEager(userId);
+
+            var photo = user.Photos.FirstOrDefault(p => p.Id == photoId);
+            
+            if (photo == null)
+                return NotFound();
+
+            photoRepo.Remove(photo);
+
+            if (await unit.CompleteAsync())
+            {
+                photoService.DeletePhotoFromCloudinary(photo);
+                return Ok(photoId);
+            }
+
+            return BadRequest("Failed to delete the photo");
         }
     }
 }
