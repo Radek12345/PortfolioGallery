@@ -64,6 +64,24 @@ namespace PortfolioGallery.API.Controllers
             return Ok(mapper.Map<PhotoResource>(photo));
         }
 
+        [HttpPut("{photoId}")]
+        public async Task<IActionResult> UpdatePhotoInformation(int userId, int photoId, PhotoResource resource)
+        {
+            if (!ControllerHelper.IsAllowedUser(userId, User))
+                return Unauthorized();
+
+            var photo = await photoRepo.Get(photoId);
+
+            if (photo == null)
+                return NotFound();
+
+            mapper.Map<PhotoResource, Photo>(resource, photo);
+
+            await unit.CompleteAsync();
+
+            return Ok(mapper.Map<PhotoResource>(photo));
+        }
+
         [HttpDelete("{photoId}")]
         public async Task<IActionResult> DeletePhoto(int userId, int photoId)
         {
