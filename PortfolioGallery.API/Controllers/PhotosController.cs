@@ -53,7 +53,6 @@ namespace PortfolioGallery.API.Controllers
                 return CreatedAtRoute("GetPhoto", new { id = photo.Id }, photoToReturn);
             }
 
-            // zrobić usuwanie z cloudinary!
             return BadRequest("Could not add the photo");
         }
 
