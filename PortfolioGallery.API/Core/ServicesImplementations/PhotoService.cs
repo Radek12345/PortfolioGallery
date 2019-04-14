@@ -55,10 +55,7 @@ namespace PortfolioGallery.API.Core.ServicesImplementations
                     Url = imageUploadResult.Uri.ToString(),
                     PublicId = imageUploadResult.PublicId,
                     DateAdded = DateTime.Now,
-                    
-                    // temp
-                    Name = "test name",
-                    Description = "test description"
+                    Name = photoFile.Name
                 };
             }
 
