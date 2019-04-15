@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { routes } from './routes';
 import { GalleryComponent } from './components/gallery/gallery.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    GalleryComponent
+    GalleryComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

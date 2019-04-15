@@ -1,2 +1,7 @@
 @import '../node_modules/bootswatch/dist/superhero/bootstrap.min.css';
 @import '../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
+
+.container-narrow-center {
+    max-width: 540px; 
+    text-align: center;
+}
