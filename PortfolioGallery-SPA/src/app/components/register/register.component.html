@@ -17,7 +17,7 @@
       <label for="repeatPassword">Repeat password:</label>
       <input type="password" class="form-control" id="repeatPassword" [(ngModel)]="repeatedPassword" name="repeatedPassword" required>
     </div>
-    <button (click)="register(user)" type="submit" class="btn btn-primary" [disabled]="form.invalid">
+    <button #registerButton (click)="register(user)" type="submit" class="btn btn-primary" [disabled]="form.invalid">
       <i class="fas fa-check mr-1"></i>
       Register
     </button>

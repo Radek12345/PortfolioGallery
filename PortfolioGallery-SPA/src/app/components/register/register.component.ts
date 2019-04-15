@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 import { AuthService } from './../../services/auth.service';
 import { User } from '../models/user';
@@ -11,6 +11,7 @@ import { User } from '../models/user';
 export class RegisterComponent implements OnInit {
   user: User;
   repeatedPassword: String;
+  @ViewChild('registerButton') registerButton: ElementRef;
 
   constructor(private authService: AuthService) { }
 
@@ -28,10 +29,13 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
+    this.registerButton.nativeElement.setAttribute('disabled', 'true');
+
     this.authService.register(this.user).subscribe(() => {
       console.log('Register successful');
     }, error => {
       console.log(error);
+      this.registerButton.nativeElement.removeAttribute('disabled');
     });
   }
 
