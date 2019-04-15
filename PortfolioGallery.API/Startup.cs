@@ -54,7 +54,9 @@ namespace PortfolioGallery.API
 
             services.Configure<CloudinarySettings>(Configuration
                 .GetSection("CloudinarySettings"));
-                
+
+            services.AddCors();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

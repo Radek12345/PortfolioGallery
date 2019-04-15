@@ -9,6 +9,7 @@ namespace PortfolioGallery.API.Mapping
         public MappingProfile()
         {
             CreateMap<User, UserResource>().ReverseMap();
+            CreateMap<RegisterResource, User>();
             CreateMap<Photo, PhotoResource>().ReverseMap();
         }
     }
