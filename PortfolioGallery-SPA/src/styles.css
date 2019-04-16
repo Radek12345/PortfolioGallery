@@ -1,5 +1,6 @@
 @import '../node_modules/bootswatch/dist/superhero/bootstrap.min.css';
 @import '../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
+@import '../node_modules/alertifyjs/build/css/alertify.min.css';
 
 .container-narrow-center {
     max-width: 540px; 

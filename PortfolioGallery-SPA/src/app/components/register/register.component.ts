@@ -1,3 +1,4 @@
+import { Alertify } from './../../common/alertify';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 import { AuthService } from './../../services/auth.service';
@@ -25,15 +26,16 @@ export class RegisterComponent implements OnInit {
 
   register() {
     if (this.user.password !== this.repeatedPassword) {
-      console.log('Repeated password is diffrent');
+      Alertify.error('Repeated password is diffrent');
       return;
     }
 
     this.registerButton.nativeElement.setAttribute('disabled', 'true');
 
     this.authService.register(this.user).subscribe(() => {
-      console.log('Register successful');
+      Alertify.success('Registration successful');
     }, error => {
+      Alertify.error('Registration failed');
       console.log(error);
       this.registerButton.nativeElement.removeAttribute('disabled');
     });
