@@ -1,8 +1,9 @@
-import { Alertify } from './../../common/alertify';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { AuthService } from './../../services/auth.service';
 import { User } from '../../models/user';
+import { Alertify } from './../../common/alertify';
 
 @Component({
   selector: 'app-register',
@@ -13,8 +14,9 @@ export class RegisterComponent implements OnInit {
   user: User;
   repeatedPassword: String;
   @ViewChild('registerButton') registerButton: ElementRef;
+  repeatedDifferent = false;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.user = {
@@ -26,7 +28,7 @@ export class RegisterComponent implements OnInit {
 
   register() {
     if (this.user.password !== this.repeatedPassword) {
-      Alertify.error('Repeated password is diffrent');
+      Alertify.error('Repeated password is different');
       return;
     }
 
@@ -34,9 +36,9 @@ export class RegisterComponent implements OnInit {
 
     this.authService.register(this.user).subscribe(() => {
       Alertify.success('Registration successful');
-    }, error => {
-      Alertify.error('Registration failed');
-      console.log(error);
+      this.router.navigate(['/gallery'])
+    }, errorResponse => {
+      Alertify.error(errorResponse.error);
       this.registerButton.nativeElement.removeAttribute('disabled');
     });
   }

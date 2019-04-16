@@ -1,5 +1,5 @@
 // global variable from external
-declare let alertify: any;
+declare const alertify: any;
 
 export class Alertify {
     static error(message: string) {
