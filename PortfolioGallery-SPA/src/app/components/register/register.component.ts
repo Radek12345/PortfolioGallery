@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService } from './../../services/auth.service';
-import { User } from '../../models/user';
+import { RegisterResource } from '../../models/registerResource';
 import { Alertify } from './../../common/alertify';
 
 @Component({
@@ -11,7 +11,7 @@ import { Alertify } from './../../common/alertify';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  user: User;
+  user: RegisterResource;
   repeatedPassword: String;
   @ViewChild('registerButton') registerButton: ElementRef;
   repeatedDifferent = false;
@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
 
     this.authService.register(this.user).subscribe(() => {
       Alertify.success('Registration successful');
-      this.router.navigate(['/gallery'])
+      this.router.navigate(['/gallery']);
     }, errorResponse => {
       Alertify.error(errorResponse.error);
       this.registerButton.nativeElement.removeAttribute('disabled');

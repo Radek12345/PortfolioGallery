@@ -1,8 +1,9 @@
+import { LoginResource } from 'src/app/models/loginResource';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
-import { User } from '../models/user';
+import { RegisterResource } from '../models/registerResource';
 
 
 @Injectable({
@@ -13,7 +14,11 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  register(user: User) {
-    return this.http.post(this.baseUrl + 'register', user);
+  register(resource: RegisterResource) {
+    return this.http.post(this.baseUrl + 'register', resource);
+  }
+
+  login(resource: LoginResource) {
+    return this.http.post(this.baseUrl + 'login', resource);
   }
 }

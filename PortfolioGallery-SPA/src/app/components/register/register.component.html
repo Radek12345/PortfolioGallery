@@ -22,7 +22,7 @@
       <input type="password" class="form-control" id="repeatPassword" [(ngModel)]="repeatedPassword" name="repeatedPassword" required #repeated="ngModel">
       <div *ngIf="repeated.touched && repeated.invalid" class="alert alert-danger">Please repeat password</div>
     </div>
-    <button #registerButton (click)="register(user)" type="submit" class="btn btn-primary" [disabled]="form.invalid">
+    <button #registerButton (click)="register()" type="submit" class="btn btn-primary" [disabled]="form.invalid">
       <i class="fas fa-check mr-1"></i>
       Register
     </button>
