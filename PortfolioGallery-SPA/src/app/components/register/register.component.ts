@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService } from './../../services/auth.service';
-import { RegisterResource } from '../../models/registerResource';
+import { RegisterResource } from '../../models/register-resource';
 import { Alertify } from './../../common/alertify';
 
 @Component({

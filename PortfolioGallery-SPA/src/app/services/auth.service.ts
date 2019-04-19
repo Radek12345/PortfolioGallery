@@ -1,9 +1,9 @@
-import { LoginResource } from 'src/app/models/loginResource';
+import { LoginResource } from 'src/app/models/login-resource';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
-import { RegisterResource } from '../models/registerResource';
+import { RegisterResource } from '../models/register-resource';
 
 
 @Injectable({

@@ -1,7 +1,7 @@
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
-import { LoginResource } from 'src/app/models/loginResource';
+import { LoginResource } from 'src/app/models/login-resource';
 import { P } from '@angular/core/src/render3';
 import { Router } from '@angular/router';
 import { Alertify } from 'src/app/common/alertify';
@@ -25,6 +25,9 @@ export class LoginComponent implements OnInit {
 
   loginUser() {
     this.authService.login(this.resource).subscribe((response: any) => {
+      localStorage.setItem('token', response.token);
+      localStorage.setItem('user', JSON.stringify(response.userResource));
+
       Alertify.success('Logged in successful');
       this.router.navigate(['/gallery']);
     }, errorResponse => {
