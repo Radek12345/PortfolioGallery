@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -33,6 +34,14 @@ namespace PortfolioGallery.API.Controllers
             this.unit = unit;
             this.photoService = photoService;
             this.userRepo = userRepo;
+        }
+
+        [HttpGet]
+        public async Task<IEnumerable<PhotoResource>> GetPhotos()
+        {
+            var photos = await photoRepo.GetAll();
+
+            return mapper.Map<IEnumerable<Photo>, IEnumerable<PhotoResource>>(photos);
         }
 
         [HttpPost]
