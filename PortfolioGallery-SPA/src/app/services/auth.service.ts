@@ -1,9 +1,10 @@
-import { LoginResource } from 'src/app/models/login-resource';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { environment } from 'src/environments/environment';
 import { RegisterResource } from '../models/register-resource';
+import { LoginResource } from 'src/app/models/login-resource';
 
 
 @Injectable({
@@ -11,6 +12,7 @@ import { RegisterResource } from '../models/register-resource';
 })
 export class AuthService {
   baseUrl = environment.apiUrl + 'auth/';
+  jwtHelper = new JwtHelperService();
 
   constructor(private http: HttpClient) { }
 
@@ -22,11 +24,11 @@ export class AuthService {
     return this.http.post(this.baseUrl + 'login', resource);
   }
 
-  getLoggedUserId(): string {
-    return JSON.parse(localStorage.getItem('user')).id;
+  getLoggedUserId() {
+    return this.jwtHelper.decodeToken(localStorage.getItem('token')).nameid;
   }
 
   isAuthenticated(): boolean {
-    return localStorage.getItem('token') != null ? true : false;
+    return !this.jwtHelper.isTokenExpired(localStorage.getItem('token'));
   }
 }
