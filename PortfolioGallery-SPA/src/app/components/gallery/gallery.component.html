@@ -1,3 +1,13 @@
-<ul>
-  <li *ngFor="let p of photos"><img src="{{p.url}}" alt="">{{p.name}}</li>
-</ul>
+<div class="container-fluid">
+  <div class="row">
+    <div *ngFor="let p of photos" class="col-sm-6 col-md-4 col-lg-4 col-xl-2">
+      <div class="card mt-3">
+        <img class="card-img-top" src="{{p.url}}" alt="{{p.name}}">
+        <div class="card-body">
+          <h4 class="card-title">{{p.name}}</h4>
+          <a href="#" class="btn btn-primary">Show details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
