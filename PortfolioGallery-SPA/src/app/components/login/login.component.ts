@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('token', response.token);
       localStorage.setItem('user', JSON.stringify(response.userResource));
 
-      Alertify.success('Logged in successful');
+      Alertify.success('Logged in successfully');
       this.router.navigate(['/gallery']);
     }, errorResponse => {
       console.log(errorResponse);

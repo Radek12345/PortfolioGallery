@@ -35,7 +35,7 @@ export class RegisterComponent implements OnInit {
     this.registerButton.nativeElement.setAttribute('disabled', 'true');
 
     this.authService.register(this.user).subscribe(() => {
-      Alertify.success('Registration successful');
+      Alertify.success('Registered successfully');
       this.router.navigate(['/gallery']);
     }, errorResponse => {
       Alertify.error(errorResponse.error);
