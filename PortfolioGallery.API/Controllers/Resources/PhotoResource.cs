@@ -5,6 +5,8 @@ namespace PortfolioGallery.API.Controllers.Resources
 {
     public class PhotoResource
     {   
+        public int Id { get; set; }
+
         [Required]
         public string Name { get; set; }
 

@@ -27,4 +27,11 @@ export class GalleryComponent implements OnInit {
     return (userId == this.loggedUserId);
   }
 
+  deletePhoto(id: number) {
+    this.photoService.deletePhoto(id).subscribe(response => {
+      const photo = this.photos.find(p => p.id === id);
+      this.photos.splice(this.photos.indexOf(photo), 1);
+    });
+  }
+
 }

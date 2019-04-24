@@ -6,7 +6,9 @@
         <div class="card-body">
           <h4 class="card-title">{{p.name}}</h4>
           <button class="btn btn-primary">Show details</button>
-          <button *ngIf="isLoggedUserPhoto(p.userId)" class="btn btn-danger ml-2"><i class="far fa-trash-alt"></i></button>
+          <button *ngIf="isLoggedUserPhoto(p.userId)" (click)="deletePhoto(p.id)" class="btn btn-danger ml-2">
+            <i class="far fa-trash-alt"></i>
+          </button>
         </div>
       </div>
     </div>

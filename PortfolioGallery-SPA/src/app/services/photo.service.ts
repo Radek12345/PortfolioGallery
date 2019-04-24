@@ -16,4 +16,8 @@ export class PhotoService {
   getPhotos() {
     return this.http.get<Photo[]>(this.baseUrl + 'photos/' + this.authService.getLoggedUserId());
   }
+
+  deletePhoto(id: number) {
+    return this.http.delete(this.baseUrl + 'photos/' + this.authService.getLoggedUserId() + '/' + id);
+  }
 }
