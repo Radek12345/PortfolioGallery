@@ -1,8 +1,8 @@
+import { AuthService } from './auth.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { environment } from 'src/environments/environment';
-import { UserInfo } from '../common/user-info';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +10,9 @@ import { UserInfo } from '../common/user-info';
 export class PhotoService {
   baseUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   getPhotos() {
-    return this.http.get(this.baseUrl + 'photos/' + UserInfo.getLoggedUserId());
+    return this.http.get(this.baseUrl + 'photos/' + this.authService.getLoggedUserId());
   }
 }

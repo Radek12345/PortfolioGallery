@@ -21,4 +21,12 @@ export class AuthService {
   login(resource: LoginResource) {
     return this.http.post(this.baseUrl + 'login', resource);
   }
+
+  getLoggedUserId(): string {
+    return JSON.parse(localStorage.getItem('user')).id;
+  }
+
+  isAuthenticated(): boolean {
+    return localStorage.getItem('token') != null ? true : false;
+  }
 }

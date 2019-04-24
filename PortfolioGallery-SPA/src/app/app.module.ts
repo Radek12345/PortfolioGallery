@@ -1,4 +1,3 @@
-import { AuthService } from './services/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -13,6 +12,9 @@ import { GalleryComponent } from './components/gallery/gallery.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { PhotoService } from './services/photo.service';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { PhotoService } from './services/photo.service';
     HomeComponent,
     GalleryComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    NavbarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
