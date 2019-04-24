@@ -5,7 +5,8 @@
         <img class="card-img-top" src="{{p.url}}" alt="{{p.name}}">
         <div class="card-body">
           <h4 class="card-title">{{p.name}}</h4>
-          <a href="#" class="btn btn-primary">Show details</a>
+          <button class="btn btn-primary">Show details</button>
+          <button *ngIf="isLoggedUserPhoto(p.userId)" class="btn btn-danger ml-2"><i class="far fa-trash-alt"></i></button>
         </div>
       </div>
     </div>
