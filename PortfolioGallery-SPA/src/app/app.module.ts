@@ -16,6 +16,7 @@ import { PhotoService } from './services/photo.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AuthService } from './services/auth.service';
+import { PhotoFormComponent } from './components/photo-form/photo-form.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AuthService } from './services/auth.service';
     RegisterComponent,
     LoginComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    PhotoFormComponent
   ],
   imports: [
     BrowserModule,
