@@ -9,4 +9,8 @@ export class Alertify {
     static success(message: string) {
         alertify.success(message);
     }
+
+    static warning(message: string) {
+        alertify.warning(message);
+    }
 }

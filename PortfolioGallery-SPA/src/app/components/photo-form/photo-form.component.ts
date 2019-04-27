@@ -34,7 +34,11 @@ export class PhotoFormComponent implements OnInit {
       this.photoService.updatePhotoInfo(response.id, this.photoInfo).subscribe(() => {
         Alertify.success('Photo uploaded successfully');
         this.router.navigate(['/gallery']);
+      }, error => {
+        Alertify.warning('Photo uploaded successfully but there was an error while saving photo information');
       });
+    }, error => {
+      Alertify.error('Sorry could not upload photo, please try again or contact administrator');
     });
   }
 
