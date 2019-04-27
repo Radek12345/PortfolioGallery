@@ -9,15 +9,21 @@ import { Photo } from '../models/photo';
   providedIn: 'root'
 })
 export class PhotoService {
-  baseUrl = environment.apiUrl;
+  baseUrl = environment.apiUrl + 'photos/' + this.authService.getLoggedUserId();
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   getPhotos() {
-    return this.http.get<Photo[]>(this.baseUrl + 'photos/' + this.authService.getLoggedUserId());
+    return this.http.get<Photo[]>(this.baseUrl);
   }
 
   deletePhoto(id: number) {
-    return this.http.delete(this.baseUrl + 'photos/' + this.authService.getLoggedUserId() + '/' + id);
+    return this.http.delete(this.baseUrl + '/' + id);
+  }
+
+  uploadPhoto(photo: File) {
+    const formData = new FormData();
+    formData.append('photoFile', photo);
+    return this.http.post(this.baseUrl, formData);
   }
 }

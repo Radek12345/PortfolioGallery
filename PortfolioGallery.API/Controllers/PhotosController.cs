@@ -59,7 +59,7 @@ namespace PortfolioGallery.API.Controllers
             if (await unit.CompleteAsync())
             {
                 var photoToReturn = mapper.Map<PhotoResource>(photo);
-                return CreatedAtRoute("GetPhoto", new { id = photo.Id }, photoToReturn);
+                return CreatedAtRoute("GetPhoto", new { photoId = photo.Id }, photoToReturn);
             }
 
             return BadRequest("Could not add the photo");
