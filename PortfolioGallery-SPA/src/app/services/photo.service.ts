@@ -17,13 +17,17 @@ export class PhotoService {
     return this.http.get<Photo[]>(this.baseUrl);
   }
 
-  deletePhoto(id: number) {
-    return this.http.delete(this.baseUrl + '/' + id);
+  deletePhoto(photoId: number) {
+    return this.http.delete(this.baseUrl + '/' + photoId);
   }
 
   uploadPhoto(photo: File) {
     const formData = new FormData();
     formData.append('photoFile', photo);
     return this.http.post(this.baseUrl, formData);
+  }
+
+  updatePhotoInfo(photoId: number, photo: Partial<Photo>) {
+    return this.http.put(this.baseUrl + '/' + photoId, photo);
   }
 }

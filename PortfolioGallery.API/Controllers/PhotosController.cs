@@ -83,7 +83,8 @@ namespace PortfolioGallery.API.Controllers
             if (photo == null)
                 return NotFound();
 
-            mapper.Map<PhotoResource, Photo>(resource, photo);
+            photo.Name = resource.Name;
+            photo.Description = resource.Description;
 
             await unit.CompleteAsync();
 
