@@ -8,7 +8,9 @@
         <img class="card-img-top" src="{{p.url}}" alt="{{p.name}}">
         <div class="card-body">
           <h4 class="card-title">{{p.name}}</h4>
-          <button class="btn btn-primary" [routerLink]="['/photo-detail', p.id]">Show details</button>
+          <button class="btn btn-primary" [routerLink]="['/photo-detail', p.id]">
+            <i class="fa fa-search mr-1" aria-hidden="true"></i>Show details
+          </button>
           <button *ngIf="isLoggedUserPhoto(p.userId)" (click)="openModal(template, p.id)" class="btn btn-danger ml-2">
             <i class="far fa-trash-alt"></i>
           </button>
