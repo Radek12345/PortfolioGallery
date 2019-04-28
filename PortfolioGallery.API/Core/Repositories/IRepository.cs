@@ -16,5 +16,7 @@ namespace PortfolioGallery.API.Core.Repositories
         void Remove(T entity);
 
         Task<T> FirstOrDefault(Expression<Func<T, bool>> predicate);
+
+        Task<IEnumerable<T>> Find(Expression<Func<T, bool>> predicate);
     }
 }

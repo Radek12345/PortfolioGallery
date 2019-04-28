@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -41,5 +42,9 @@ namespace PortfolioGallery.API.Persistence.Repositories
             return await context.Set<T>().FirstOrDefaultAsync(predicate);
         }
 
+        public async Task<IEnumerable<T>> Find(Expression<Func<T, bool>> predicate)
+        {
+            return await context.Set<T>().Where(predicate).ToListAsync();
+        }
     }
 }

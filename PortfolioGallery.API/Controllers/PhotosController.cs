@@ -37,9 +37,14 @@ namespace PortfolioGallery.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<PhotoResource>> GetPhotos()
+        public async Task<IEnumerable<PhotoResource>> GetPhotos([FromQuery] FilterResource filter)
         {
-            var photos = await photoRepo.GetAll();
+            IEnumerable<Photo> photos;
+
+            if (filter.PhotoName != null)
+                photos = await photoRepo.Find(p => p.Name.Contains(filter.PhotoName));
+            else
+                photos = await photoRepo.GetAll();
 
             return mapper.Map<IEnumerable<Photo>, IEnumerable<PhotoResource>>(photos);
         }

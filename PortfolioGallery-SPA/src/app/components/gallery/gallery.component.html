@@ -9,7 +9,7 @@
         <div class="card-body">
           <h4 class="card-title">{{p.name}}</h4>
           <button class="btn btn-primary" [routerLink]="['/photo-detail', p.id]">
-            <i class="fa fa-search mr-1" aria-hidden="true"></i>Show details
+            <i class="fa fa-search mr-2" aria-hidden="true"></i>Details
           </button>
           <button *ngIf="isLoggedUserPhoto(p.userId)" (click)="openModal(template, p.id)" class="btn btn-danger ml-2">
             <i class="far fa-trash-alt"></i>
