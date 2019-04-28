@@ -1,3 +1,4 @@
+import { PhotoDetailComponent } from './components/photo-detail/photo-detail.component';
 import { Routes } from '@angular/router';
 
 import { GalleryComponent } from './components/gallery/gallery.component';
@@ -12,5 +13,6 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'gallery', component: GalleryComponent },
     { path: 'photo-form', component: PhotoFormComponent },
+    { path: 'photo-detail/:id', component: PhotoDetailComponent },
     { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

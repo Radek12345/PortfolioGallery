@@ -1,3 +1,4 @@
+import { PhotoDetailComponent } from './components/photo-detail/photo-detail.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -27,7 +28,8 @@ import { PhotoFormComponent } from './components/photo-form/photo-form.component
     LoginComponent,
     NavbarComponent,
     FooterComponent,
-    PhotoFormComponent
+    PhotoFormComponent,
+    PhotoDetailComponent
   ],
   imports: [
     BrowserModule,
