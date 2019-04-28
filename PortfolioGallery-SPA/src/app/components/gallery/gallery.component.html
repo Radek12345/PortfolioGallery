@@ -2,6 +2,9 @@
   <button class="btn btn-success btn-lg mt-3" [routerLink]="['/photo-form']">
     <i class="fas fa-camera mr-2"></i>Upload photo
   </button>
+  <input placeholder="Filter by name" type="text" name="nameForFilter" [(ngModel)]="nameForFilter">
+  <button (click)="filterPhotos()">Filter</button>
+  <button (click)="initPhotos()">Reset filter</button>
   <div class="row">
     <div *ngFor="let p of photos" class="col-sm-6 col-md-4 col-lg-4 col-xl-2">
       <div class="card mt-3">

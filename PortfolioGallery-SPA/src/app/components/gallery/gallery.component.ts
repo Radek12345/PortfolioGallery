@@ -14,16 +14,15 @@ export class GalleryComponent implements OnInit {
   loggedUserId: number;
   modalRef: BsModalRef;
 
+  nameForFilter: string;
+
   private photoIdForDeletion: number;
 
   constructor(private photoService: PhotoService, private authService: AuthService,
     private modalService: BsModalService) { }
 
   ngOnInit() {
-    this.photoService.getPhotos().subscribe(response => {
-      this.photos = response;
-    });
-
+    this.initPhotos();
     this.loggedUserId = this.authService.getLoggedUserId();
   }
 
@@ -37,6 +36,16 @@ export class GalleryComponent implements OnInit {
       const photo = this.photos.find(p => p.id === this.photoIdForDeletion);
       this.photos.splice(this.photos.indexOf(photo), 1);
       this.modalRef.hide();
+    });
+  }
+
+  filterPhotos() {
+    this.initPhotos(this.nameForFilter);
+  }
+
+  initPhotos(nameForFilter?: string) {
+    this.photoService.getPhotos(nameForFilter).subscribe(response => {
+      this.photos = response;
     });
   }
 

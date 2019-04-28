@@ -1,5 +1,5 @@
 import { AuthService } from './auth.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { environment } from 'src/environments/environment';
@@ -13,8 +13,14 @@ export class PhotoService {
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
-  getPhotos() {
-    return this.http.get<Photo[]>(this.baseUrl);
+  getPhotos(photoName?: string) {
+    let params: HttpParams;
+
+    if (photoName) {
+      params = new HttpParams().set('photoName', photoName);
+    }
+
+    return this.http.get<Photo[]>(this.baseUrl, { params: params });
   }
 
   getPhoto(photoId: number) {
